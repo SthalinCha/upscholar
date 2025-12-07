@@ -21,12 +21,6 @@ venv/
 *.swo
 
 # Data files (NO subir archivos grandes)
-data/embeddings/
-*.npy
-*.npz
-*.pkl
-*.pickle
-*.csv
 
 # Railway
 .railway/
