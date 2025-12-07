@@ -18,13 +18,12 @@ RUN python -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
 # Crear directorio para datos
 RUN mkdir -p data
 
-# Copiar código fuente (asegúrate de tener __init__.py)
-
-COPY backend/app/ ./app/
+# Copiar código fuente y datos
+COPY app/ ./app/
 COPY data/documentos.csv ./data/
 
 # Exponer puerto
 EXPOSE 8000
 
-# Comando para ejecutar (ajusta la ruta)
+# Comando para ejecutar
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
