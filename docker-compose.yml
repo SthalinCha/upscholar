@@ -2,37 +2,39 @@ version: '3.8'
 
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: upscholar-backend
     ports:
       - "8000:8000"
-    environment:
-      - PORT=8000
-      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-      - PYTHONUNBUFFERED=1
-      - PYTHONPATH=/app
     volumes:
+      - ./backend:/app
       - ./data:/app/data
-      - ./backend/data:/app/backend/data
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 40s
     restart: unless-stopped
     networks:
       - upscholar-network
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: upscholar-frontend
     ports:
       - "80:80"
     depends_on:
       backend:
         condition: service_healthy
-    environment:
-      - BACKEND_URL=http://backend:8000
     restart: unless-stopped
     networks:
       - upscholar-network
