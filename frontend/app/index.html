@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPScholar - Búsqueda Académica</title>
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* Ocultar elementos al inicio */
+        .hidden-on-start {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="assets/logoKB.png" alt="UPScholar Logo" class="logo">
+    </div>
+
+    <div class="search-box">
+        <div class="search-wrapper">
+            <input type="text" id="search-input" placeholder="Buscar..."> 
+            <span class="material-icons search-icon">search</span>
+        </div>
+
+        <div class="search-buttons">
+            <button id="btn-tradicional" class="search-btn btn-primary">
+                <span></span>
+                <span>Buscar</span>
+            </button>
+            <button id="btn-inteligente" class="search-btn btn-secondary">
+                <span></span>
+                <span>LLM Embeddings</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Elementos ocultos al inicio -->
+
+    
+
+    <div class="results-container hidden-on-start" id="results-container">
+        <div class="loading" id="initial-loading">
+            <div class="spinner"></div>
+            <p>Conectando con el sistema...</p>
+        </div>
+    </div>
+
+    <footer class="hidden-on-start">
+        <div>UPScholar © 2024 - Plataforma de investigación académica</div>
+        <div class="status-indicator">
+            Estado del backend: <span id="backend-status" class="status-offline">Verificando...</span>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Mostrar elementos ocultos cuando se hace clic en cualquier botón de búsqueda
+        const btnTradicional = document.getElementById('btn-tradicional');
+        const btnInteligente = document.getElementById('btn-inteligente');
+        const hiddenElements = document.querySelectorAll('.hidden-on-start');
+
+        function mostrarElementos() {
+            hiddenElements.forEach(el => el.style.display = 'block');
+        }
+
+        btnTradicional.addEventListener('click', mostrarElementos);
+        btnInteligente.addEventListener('click', mostrarElementos);
+    </script>
+</body>
+</html>
