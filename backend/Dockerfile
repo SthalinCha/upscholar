@@ -19,7 +19,8 @@ RUN python -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
 RUN mkdir -p data
 
 # Copiar código fuente (asegúrate de tener __init__.py)
-COPY app/ ./app/
+
+COPY backend/app/ ./app/
 COPY data/documentos.csv ./data/
 
 # Exponer puerto
